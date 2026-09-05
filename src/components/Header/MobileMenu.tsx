@@ -5,7 +5,7 @@ type MobileMenuProps = {
     closeMenu: () => void;
 }
 
-const MobileMenu = ({closeMenu}) => {
+const MobileMenu = ({closeMenu} : MobileMenuProps) => {
   return (
       <div
           className='fixed top-0 right-0 h-dvh z-50 w-[185px] md:w-[300px] flex flex-col justify-between items-start bg-green-background'>
