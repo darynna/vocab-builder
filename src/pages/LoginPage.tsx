@@ -23,7 +23,7 @@ const LoginPage = () => {
                 </div>
             </div>
             {/* Desktop illustration + text */}
-            <AuthIllustration/>git add src/components/Auth/AuthIllustration.tsx src/pages/LoginPage.tsx src/pages/RegisterPage.tsx
+            <AuthIllustration/>
         </div>
     );
 };
