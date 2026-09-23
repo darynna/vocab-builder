@@ -4,13 +4,15 @@ import {useEffect, useState} from "react";
 import NavigationLinks from "./NavigationLinks.tsx";
 import useMediaQuery from "../../hooks/useMediaQuery.ts";
 import MobileMenu from "./MobileMenu.tsx";
+import {useAuthStore} from "../../stores/authStore.tsx";
+import {requestLogout} from "../../services/authService.tsx";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // Temporary placeholder until real authentication is implemented
-    const isSignedIn = true;
-
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const isDesktop = useMediaQuery("(min-width: 1024px)");
+    const logout = useAuthStore((state) => state.logout);
+
     useEffect(() => {
         if (isDesktop) {
             setIsMenuOpen(false);
@@ -21,16 +23,28 @@ const Header = () => {
         setIsMenuOpen(false);
     }
 
-    if (!isSignedIn) {
+    const handleLogout = async () => {
+        try {
+            await requestLogout();
+        } catch (error) {
+
+        }finally {
+            logout();
+        }
+    }
+
+    if (!isAuthenticated) {
         return (
             <header className="px-4 py-4 md:px-8 md:py-5">
-                <Link to="/">
-                    <img
-                        className="h-9 md:h-10"
-                        src="/icons/logos/logo.svg"
-                        alt="VocabBuilder"
-                    />
-                </Link>
+                <nav className='mx-auto w-full max-w-[1240px]'>
+                    <Link to="/">
+                        <img
+                          className="h-9 md:h-10"
+                          src="/icons/logos/logo.svg"
+                          alt="VocabBuilder"
+                       />
+                     </Link>
+                </nav>
             </header>
         );
     }
@@ -50,7 +64,7 @@ const Header = () => {
                         {/* Desktop user */}
                         <div className='hidden lg:flex items-center gap-4 text-base'>
                             <UserBar userImage={"/icons/user-green.png"} nameClassName={"text-black"}/>
-                            <button type='button' className="flex items-center gap-2 text-base">Log out <img
+                            <button onClick={handleLogout} type='button' className="flex items-center gap-2 text-base">Log out <img
                                 src="/icons/arrow-right.png" alt="logout"/>
                             </button>
                         </div>
@@ -68,7 +82,7 @@ const Header = () => {
 
             {/* Mobile / tablet menu */}
             {isMenuOpen && (
-                <MobileMenu closeMenu={closeMenu}/>
+                <MobileMenu closeMenu={closeMenu} handleLogOut={handleLogout}/>
             )}
         </>
     )

@@ -3,9 +3,10 @@ import NavigationLinks from "./NavigationLinks.tsx";
 
 type MobileMenuProps = {
     closeMenu: () => void;
+    handleLogOut: () => void;
 }
 
-const MobileMenu = ({closeMenu} : MobileMenuProps) => {
+const MobileMenu = ({closeMenu, handleLogOut} : MobileMenuProps) => {
   return (
       <div
           className='fixed top-0 right-0 h-dvh z-50 w-[185px] md:w-[300px] flex flex-col justify-between items-start bg-green-background'>
@@ -17,7 +18,7 @@ const MobileMenu = ({closeMenu} : MobileMenuProps) => {
           </div>
           <div className='flex flex-col gap-7 p-4 md:px-8'>
               <NavigationLinks onNavigate={closeMenu} mobile/>
-              <button type='button' className="flex items-center gap-2 text-sm text-white">Log out <img
+              <button onClick={handleLogOut} type='button' className="flex items-center gap-2 text-sm text-white">Log out <img
                   src="/icons/arrow-right-white.png" alt="logout"/>
               </button>
           </div>

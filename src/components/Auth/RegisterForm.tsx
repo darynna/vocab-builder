@@ -4,6 +4,7 @@ import {requestRegister} from "../../services/authService.tsx";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {useAuthStore} from "../../stores/authStore.tsx";
 
 type Inputs = {
     name: string;
@@ -14,6 +15,7 @@ type Inputs = {
 const RegisterForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const setAuth = useAuthStore((state) => state.setAuth);
     const {
         register,
         handleSubmit,
@@ -23,7 +25,8 @@ const RegisterForm = () => {
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setIsLoading(true);
         try {
-            await requestRegister(data);
+            const response = await requestRegister(data);
+            setAuth(response);
             navigate("/");
         } catch (error) {
             if (axios.isAxiosError(error)) {

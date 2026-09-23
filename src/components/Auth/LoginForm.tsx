@@ -4,6 +4,7 @@ import {requestLogin} from "../../services/authService.tsx";
 import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useAuthStore} from "../../stores/authStore.tsx";
 
 type Inputs = {
     email: string;
@@ -13,6 +14,7 @@ type Inputs = {
 const LoginForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const setAuth = useAuthStore((state) => state.setAuth);
     const {
         register,
         handleSubmit,
@@ -22,7 +24,8 @@ const LoginForm = () => {
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setIsLoading(true);
         try {
-            await requestLogin(data);
+            const response = await requestLogin(data);
+            setAuth(response);
             navigate("/");
         } catch (error) {
             if (axios.isAxiosError(error)) {
