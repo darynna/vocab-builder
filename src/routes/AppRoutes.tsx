@@ -6,18 +6,24 @@ import DictionaryPage from "../pages/DictionaryPage.tsx";
 import RecommendPage from "../pages/RecommendPage.tsx";
 import TrainingPage from "../pages/TrainingPage.tsx";
 import MainLayout from "../layouts/MainLayout.tsx";
+import PrivateRoute from "./PrivateRoute.tsx";
+import PublicRoute from "./PublicRoute.tsx";
 
 function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route element={<MainLayout/>}>
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/register" element={<RegisterPage/>}/>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/dictionary" element={<DictionaryPage/>}/>
-                    <Route path="/recommend" element={<RecommendPage/>}/>
-                    <Route path="/training" element={<TrainingPage/>}/>
+                    <Route element={<PublicRoute/>}>
+                        <Route path="/login" element={<LoginPage/>}/>
+                        <Route path="/register" element={<RegisterPage/>}/>
+                    </Route>
+                    <Route element={<PrivateRoute/>}>
+                        <Route path="/" element={<HomePage/>}/>
+                        <Route path="/dictionary" element={<DictionaryPage/>}/>
+                        <Route path="/recommend" element={<RecommendPage/>}/>
+                        <Route path="/training" element={<TrainingPage/>}/>
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>
