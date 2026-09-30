@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type {AuthResponse, RegisterData, SignInData} from "../types/auth.ts";
+import type {AuthResponse, RegisterData, SignInData} from "../types/auth.tsx";
 import {useAuthStore} from "../stores/authStore.tsx";
 
 export const authService = axios.create({

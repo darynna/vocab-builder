@@ -51,7 +51,7 @@ const Header = () => {
 
     return (
         <>
-            <header className="px-4 py-4 md:px-8 md:py-5">
+            <header className="px-4 py-4 md:px-8 md:py-5 bg-white">
                 <nav className="mx-auto flex w-full max-w-[1240px] items-center justify-between">
                     <Link to="/">
                         <img className="h-9 md:h-10" src="/icons/logos/logo.svg" alt='logo'/>

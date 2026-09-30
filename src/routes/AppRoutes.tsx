@@ -1,5 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import HomePage from "../pages/HomePage.tsx";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import LoginPage from "../pages/LoginPage.tsx";
 import RegisterPage from "../pages/RegisterPage.tsx";
 import DictionaryPage from "../pages/DictionaryPage.tsx";
@@ -19,7 +18,7 @@ function AppRoutes() {
                         <Route path="/register" element={<RegisterPage/>}/>
                     </Route>
                     <Route element={<PrivateRoute/>}>
-                        <Route path="/" element={<HomePage/>}/>
+                        <Route path="/" element={<Navigate to="/dictionary" replace />}/>
                         <Route path="/dictionary" element={<DictionaryPage/>}/>
                         <Route path="/recommend" element={<RecommendPage/>}/>
                         <Route path="/training" element={<TrainingPage/>}/>

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import {persist} from "zustand/middleware";
-import type { AuthResponse } from "../types/auth";
+import type { AuthResponse } from "../types/auth.tsx";
 
 type AuthState = {
     user: AuthResponse | null;
