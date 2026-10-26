@@ -1,7 +1,7 @@
-const Pagination = () => {
+const WordsPagination = () => {
   return (
     <div></div>
   );
 };
 
-export default Pagination;
+export default WordsPagination;

@@ -14,3 +14,10 @@ export type WordsResponse = {
     page: number,
     perPage: number
 };
+
+export type CreateNewWordRequest = {
+    en: string,
+    ua: string,
+    category: string,
+    isIrregular?: boolean,
+}
